@@ -2,6 +2,8 @@ package com.nace.poc.restservice;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +45,7 @@ public class NaceRestController {
 
 	@ApiOperation(value = "/orders/naceID", nickname = "getNaceItem")
 	@RequestMapping(value = "/orders/{naceID}", method = RequestMethod.GET, consumes = "application/json", produces = "application/json")
-	public ResponseEntity<NaceData> getNaceDetails(@PathVariable("naceID") String naceID) {
+	public ResponseEntity<NaceData> getNaceDetails(@PathVariable(name="naceID", required=true) String naceID) {
 		Optional<NaceData> data = naceService.getNaceData(naceID);
 		if (data.isEmpty()) {
 			return new ResponseEntity<NaceData>(HttpStatus.NOT_FOUND);
@@ -54,13 +56,13 @@ public class NaceRestController {
 
 	@ApiOperation(value = "/order", nickname = "createNaceItem")
 	@RequestMapping(value = "/order", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public ResponseEntity<NaceData> addNaceRecord(@RequestBody NaceData naceEntry) {
+	public ResponseEntity<NaceData> addNaceRecord( @Valid @RequestBody NaceData naceEntry) {
 		return new ResponseEntity<NaceData>(naceService.addNaceItem(naceEntry), HttpStatus.CREATED);
 	}
 	
 	@ApiOperation(value = "/putNaceDetails", nickname = "uploadNaceDetails")
 	@RequestMapping(value = "/putNaceDetails", method = RequestMethod.POST)
-	public ResponseEntity<String> uploadNaceFile(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity<String> uploadNaceFile(@RequestParam(name="file", required=true)  MultipartFile file) {
 		String message = "";
 
 		if (NaceCSVHelper.hasCSVFormat(file)) {
