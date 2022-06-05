@@ -24,4 +24,4 @@ The body would contain Nace data e.g.
 
 # Swagger
 
-http://localhost:8081/swagger-ui
+http://localhost:8081/swagger-ui/
