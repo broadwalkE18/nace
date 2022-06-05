@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 @Entity
 @Table(name = "nacedata")
 public class NaceData {
@@ -31,6 +29,22 @@ public class NaceData {
 
 	private String refToISICRev4;
 	
+	public NaceData(String orderId, int level, String code, String parent, String description, String itemIncludes,
+			String alsoIncludes, String rulings, String excludes, String refToISICRev4) {
+		this.orderId = orderId;
+		this.level = level;
+		this.code = code;
+		this.parent = parent;
+		this.description = description;
+		this.itemIncludes = itemIncludes;
+		this.alsoIncludes = alsoIncludes;
+		this.rulings = rulings;
+		this.refToISICRev4 = refToISICRev4;
+	}
+
+	public NaceData() {
+	}
+
 	@Id
 	@Column(name = "orderid")
 	public String getOrderId() {
