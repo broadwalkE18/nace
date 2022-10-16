@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.nace.poc.dal.NaceData;
 import com.nace.poc.dal.NaceRepository;
 
-@Component
 @Service
 public class NaceServiceImpl implements NaceService {
 	
